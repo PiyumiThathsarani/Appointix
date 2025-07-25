@@ -1,0 +1,42 @@
+﻿@model Appointix.Models.Appointment
+
+<div class="modal fade" id="bookAppointmentModal" tabindex="-1" aria-labelledby="bookAppointmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="Book" asp-controller="Appointment" method="post">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="bookAppointmentModalLabel">Book Appointment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    @* ScheduleId will be passed through JavaScript *@
+                    <input type="hidden" name="scheduleId" id="scheduleIdInput" />
+
+                    <div class="mb-3">
+                        <label asp-for="AppointeeName" class="form-label"></label>
+                        <input asp-for="AppointeeName" class="form-control" readonly />
+                        <span asp-validation-for="AppointeeName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="AppointeeEmail" class="form-label"></label>
+                        <input asp-for="AppointeeEmail" class="form-control" readonly />
+                        <span asp-validation-for="AppointeeEmail" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Notes" class="form-label"></label>
+                        <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Add any notes..."></textarea>
+                        <span asp-validation-for="Notes" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Book Appointment</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

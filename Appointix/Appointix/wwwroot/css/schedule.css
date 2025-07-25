@@ -1,0 +1,57 @@
+﻿#calendar {
+    max-width: 100%;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgb(0 0 0 / 0.1);
+}
+
+.card-header.bg-primary {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.btn-success, .btn-primary {
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .btn-success:hover {
+        background-color: #2ca24c;
+        box-shadow: 0 6px 12px rgb(72 187 120 / 0.5);
+    }
+
+    .btn-primary:hover {
+        background-color: #0d6efdcc;
+        box-shadow: 0 6px 12px rgb(13 110 253 / 0.5);
+    }
+
+h2.text-primary {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+h5.fw-semibold {
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.d-flex.gap-3 > a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+@media (max-width: 576px) {
+    .d-flex.gap-3 {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+        .d-flex.gap-3 > a {
+            width: 100%;
+            justify-content: center;
+        }
+}

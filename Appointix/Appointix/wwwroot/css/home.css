@@ -1,0 +1,35 @@
+﻿.home-hero {
+    padding: 80px 20px;
+    background: linear-gradient(to right, #e3f2fd, #ffffff);
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
+}
+
+    .home-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+    }
+
+    .home-hero p {
+        font-size: 1.2rem;
+    }
+
+.home-buttons .btn {
+    transition: all 0.3s ease-in-out;
+}
+
+    .home-buttons .btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+@media (max-width: 576px) {
+    .home-hero h1 {
+        font-size: 2rem;
+    }
+
+    .home-buttons .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}

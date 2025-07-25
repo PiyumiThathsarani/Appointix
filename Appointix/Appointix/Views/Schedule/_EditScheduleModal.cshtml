@@ -1,0 +1,38 @@
+﻿@model Appointix.Models.Schedule
+
+<form asp-action="Edit" method="post" id="editScheduleForm">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="ScheduleId" />
+
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label"></label>
+        <input asp-for="Date" class="form-control" type="date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ScheduleStartTime" class="form-label"></label>
+        <input asp-for="ScheduleStartTime" class="form-control" type="time" />
+        <span asp-validation-for="ScheduleStartTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ScheduleEndTime" class="form-label"></label>
+        <input asp-for="ScheduleEndTime" class="form-control" type="time" />
+        <span asp-validation-for="ScheduleEndTime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Note" class="form-label"></label>
+        <textarea asp-for="Note" class="form-control"></textarea>
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+    </script>
+}

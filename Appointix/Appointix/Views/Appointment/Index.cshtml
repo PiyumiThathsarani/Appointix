@@ -1,0 +1,137 @@
+﻿@model PaginatedList<Appointix.Models.Appointment>
+@{
+    ViewData["Title"] = "Appointments";
+}
+
+<div class="container py-4">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h3 class="mb-0">All Appointments</h3>
+        </div>
+        <div class="card-body">
+            <!-- Filters -->
+            <form method="get" class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <label class="form-label">Date</label>
+                    <input type="date" name="date" class="form-control" value="@ViewBag.FilterDate" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Appointee Name" value="@ViewBag.FilterName" />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Email</label>
+                    <input type="text" name="email" class="form-control" placeholder="Appointee Email" value="@ViewBag.FilterEmail" />
+                </div>
+                <div class="col-md-3 d-flex align-items-end">
+                    <button type="submit" class="btn btn-outline-primary w-100">Apply Filters</button>
+                </div>
+            </form>
+
+            <!-- Appointment Table -->
+            <div class="table-responsive">
+                <table class="table table-hover align-middle text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Client</th>
+                            <th>Email</th>
+                            <th>Schedule</th>
+                            <th>Booked</th>
+                            <th>Notes</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            var index = (Model.PageIndex - 1) * Model.PageSize + 1;
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@index++</td>
+                                    <td>@item.AppointeeName</td>
+                                    <td>@item.AppointeeEmail</td>
+                                    <td>
+                                        @item.Schedule.ScheduleStartTime.ToString("g") <br />
+                                        to <br />
+                                        @item.Schedule.ScheduleEndTime.ToString("g")
+                                    </td>
+                                    <td>@item.BookedDateTime.ToString("g")</td>
+                                    <td>@item.Notes</td>
+                                    <td>
+                                        <button class="btn btn-outline-danger btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#cancelModal"
+                                                data-id="@item.AppointmentId"
+                                                data-name="@item.AppointeeName">
+                                            <i class="bi bi-x-circle"></i> Cancel
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-muted">No appointments found for the selected criteria.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            @if (Model.TotalPages > 1)
+            {
+                <nav class="d-flex justify-content-end mt-3">
+                    <ul class="pagination">
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                                <a class="page-link" href="@Url.Action("Index", new { pageNumber = i, date = ViewBag.FilterDate, name = ViewBag.FilterName, email = ViewBag.FilterEmail })">@i</a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Cancel Modal -->
+<div class="modal fade" id="cancelModal" tabindex="-1" aria-labelledby="cancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <form method="post" asp-action="CancelAppointment">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="appointmentId" id="appointmentId" />
+            <div class="modal-content border-danger">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">Confirm Cancellation</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to cancel the appointment for <strong id="appointeeName"></strong>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes, Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const cancelModal = document.getElementById('cancelModal');
+        cancelModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget;
+            const appointmentId = button.getAttribute('data-id');
+            const appointeeName = button.getAttribute('data-name');
+
+            document.getElementById('appointmentId').value = appointmentId;
+            document.getElementById('appointeeName').textContent = appointeeName;
+        });
+    </script>
+}
