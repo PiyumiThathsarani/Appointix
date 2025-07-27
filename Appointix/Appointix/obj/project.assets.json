@@ -10680,11 +10680,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Appointment Scheduling App\\Appointix\\Appointix\\Appointix.csproj",
+      "projectUniqueName": "F:\\Appointix\\Appointix\\Appointix\\Appointix.csproj",
       "projectName": "Appointix",
-      "projectPath": "F:\\Appointment Scheduling App\\Appointix\\Appointix\\Appointix.csproj",
+      "projectPath": "F:\\Appointix\\Appointix\\Appointix\\Appointix.csproj",
       "packagesPath": "C:\\Users\\Piyumi\\.nuget\\packages\\",
-      "outputPath": "F:\\Appointment Scheduling App\\Appointix\\Appointix\\obj\\",
+      "outputPath": "F:\\Appointix\\Appointix\\Appointix\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Piyumi\\AppData\\Roaming\\NuGet\\NuGet.Config",
